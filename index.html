@@ -296,36 +296,38 @@
         </div>
       </div>
     </section>
-    <section id="calculator" style="max-width:900px;margin:60px auto;padding:28px;border:1px solid #263b50;border-radius:18px;background:#101b2b;color:#e8f0f8;font-family:Arial,sans-serif;">
-  <p style="color:#38d9f5;letter-spacing:2px;font-size:12px;">ENGINEERING TOOL</p>
-  <h2 style="margin-bottom:8px;">电路参数计算器</h2>
-  <p style="color:#a8b7c9;">计算电压、电流、电阻与电功率</p>
+   
+<section id="calculator" style="max-width:900px;margin:60px auto;padding:28px;border:1px solid #263b50;border-radius:18px;background:#101b2b;color:#e8f0f8;font-family:Arial,sans-serif;box-sizing:border-box;">
+  <p style="color:#38d9f5;letter-spacing:2px;font-size:12px;font-weight:bold;">ENGINEERING TOOL</p>
+  <h2 style="margin-bottom:8px;">Electrical Circuit Calculator</h2>
+  <p style="color:#a8b7c9;line-height:1.6;">Calculate voltage, current, resistance and electrical power using basic circuit equations.</p>
 
-  <label for="calc-type">选择计算项目</label>
-  <select id="calc-type" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0 18px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
-    <option value="voltage">计算电压 V = I × R</option>
-    <option value="current">计算电流 I = V ÷ R</option>
-    <option value="resistance">计算电阻 R = V ÷ I</option>
-    <option value="power">计算电功率 P = V × I</option>
+  <label for="calc-type">Calculation Mode</label>
+  <select id="calc-type" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0 22px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+    <option value="voltage">Voltage (V = I × R)</option>
+    <option value="current">Current (I = V ÷ R)</option>
+    <option value="resistance">Resistance (R = V ÷ I)</option>
+    <option value="power">Power (P = V × I)</option>
   </select>
 
-  <div id="calc-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
     <div>
-      <label id="label-a" for="calc-a">电流 I（A）</label>
-      <input id="calc-a" type="number" step="any" placeholder="输入电流" style="display:block;box-sizing:border-box;width:100%;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+      <label id="label-a" for="calc-a">Current, I (A)</label>
+      <input id="calc-a" type="number" step="any" placeholder="Enter current" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
     </div>
     <div>
-      <label id="label-b" for="calc-b">电阻 R（Ω）</label>
-      <input id="calc-b" type="number" step="any" placeholder="输入电阻" style="display:block;box-sizing:border-box;width:100%;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+      <label id="label-b" for="calc-b">Resistance, R (Ω)</label>
+      <input id="calc-b" type="number" step="any" placeholder="Enter resistance" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
     </div>
   </div>
 
-  <button id="calc-button" type="button" style="margin-top:20px;padding:12px 22px;border:0;border-radius:8px;background:#38d9f5;color:#081321;font-weight:bold;cursor:pointer;">计算结果</button>
+  <button id="calc-button" type="button" style="margin-top:20px;padding:12px 22px;border:0;border-radius:8px;background:#38d9f5;color:#081321;font-weight:bold;cursor:pointer;">Calculate</button>
 
-  <div id="calc-result" aria-live="polite" style="margin-top:20px;padding:16px;border-radius:10px;background:#17283b;color:#38d9f5;">
-    计算结果将在这里显示
+  <div id="calc-result" aria-live="polite" style="margin-top:20px;padding:16px;border-radius:10px;background:#17283b;color:#38d9f5;line-height:1.6;">
+    Your result will appear here.
   </div>
-  <p style="margin-top:18px;color:#91a4ba;font-size:12px;">学习用途。请确认输入单位正确，并独立核对重要工程计算结果。</p>
+
+  <p style="margin-top:18px;color:#91a4ba;font-size:12px;line-height:1.6;">For educational use only. Check your input units and independently verify results before using them in engineering applications.</p>
 </section>
 
 <script>
@@ -338,23 +340,26 @@
   const result = document.getElementById("calc-result");
 
   const settings = {
-    voltage: ["电流 I（A）", "电阻 R（Ω）", "电压 V（V）"],
-    current: ["电压 V（V）", "电阻 R（Ω）", "电流 I（A）"],
-    resistance: ["电压 V（V）", "电流 I（A）", "电阻 R（Ω）"],
-    power: ["电压 V（V）", "电流 I（A）", "电功率 P（W）"]
+    voltage: ["Current, I (A)", "Resistance, R (Ω)", "Enter current", "Enter resistance"],
+    current: ["Voltage, V (V)", "Resistance, R (Ω)", "Enter voltage", "Enter resistance"],
+    resistance: ["Voltage, V (V)", "Current, I (A)", "Enter voltage", "Enter current"],
+    power: ["Voltage, V (V)", "Current, I (A)", "Enter voltage", "Enter current"]
   };
 
   type.addEventListener("change", () => {
-    labelA.textContent = settings[type.value][0];
-    labelB.textContent = settings[type.value][1];
+    const s = settings[type.value];
+    labelA.textContent = s[0];
+    labelB.textContent = s[1];
+    a.placeholder = s[2];
+    b.placeholder = s[3];
     a.value = "";
     b.value = "";
-    result.textContent = "请输入参数，然后点击计算结果";
+    result.textContent = "Enter the required values, then click Calculate.";
   });
 
   document.getElementById("calc-button").addEventListener("click", () => {
     if (a.value.trim() === "" || b.value.trim() === "") {
-      result.textContent = "请先填写两个参数。";
+      result.textContent = "Please enter both values.";
       return;
     }
 
@@ -362,7 +367,7 @@
     const y = Number(b.value);
 
     if (!Number.isFinite(x) || !Number.isFinite(y)) {
-      result.textContent = "请输入有效的数字。";
+      result.textContent = "Please enter valid numbers.";
       return;
     }
 
@@ -376,7 +381,7 @@
         break;
       case "current":
         if (y === 0) {
-          result.textContent = "电阻不能为零。";
+          result.textContent = "Resistance cannot be zero.";
           return;
         }
         value = x / y;
@@ -384,7 +389,7 @@
         break;
       case "resistance":
         if (y === 0) {
-          result.textContent = "电流不能为零。";
+          result.textContent = "Current cannot be zero.";
           return;
         }
         value = x / y;
@@ -397,7 +402,7 @@
     }
 
     if (!Number.isFinite(value)) {
-      result.textContent = "计算结果超出可处理范围。";
+      result.textContent = "The result is outside the supported numerical range.";
       return;
     }
 
@@ -409,11 +414,12 @@
     };
 
     result.textContent =
-      formula + "；计算结果：" +
+      formula + " | Result: " +
       Number(value.toPrecision(10)) + " " + units[type.value];
   });
 })();
 </script>
+
 
     <section id="contact">
       <div class="container">
