@@ -4,307 +4,225 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="My personal engineering portfolio">
-  <title>My Portfolio | Engineering & Technology</title>
-
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="Ge Zichuan — Electrical and Electronic Engineering student at the University of Birmingham.">
+  <title>Ge Zichuan | Engineering Portfolio</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #080d18;
+      --panel: #101a2b;
+      --text: #edf4ff;
+      --muted: #9aaac2;
+      --blue: #55a8ff;
+      --cyan: #65e4f3;
+      --border: rgba(150, 190, 255, .15);
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080d18;
-      color: #eef2ff;
+      background:
+        radial-gradient(ellipse at 75% 5%, #102746 0, transparent 40%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
       line-height: 1.7;
     }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1080px, 90%); margin: auto; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1080px, 88%);
-      margin: auto;
-    }
-
-    nav {
+    header {
       position: sticky;
       top: 0;
       z-index: 10;
-      background: rgba(8, 13, 24, 0.92);
-      border-bottom: 1px solid #202a3d;
-      backdrop-filter: blur(12px);
+      background: rgba(8, 13, 24, .88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
     }
-
-    .nav-inner {
+    nav {
+      min-height: 72px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      min-height: 76px;
+      justify-content: space-between;
       gap: 20px;
     }
-
-    .logo {
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    .logo span {
-      color: #72b7ff;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      color: #aab6cc;
-      font-size: 14px;
-    }
-
-    .nav-links a:hover {
-      color: #72b7ff;
-    }
+    .logo { font-weight: 800; letter-spacing: 1px; }
+    .logo span { color: var(--cyan); }
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--cyan); }
 
     .hero {
-      padding: 110px 0 100px;
-      background:
-        radial-gradient(ellipse at 80% 20%, #152e51 0%, transparent 45%),
-        #080d18;
+      min-height: 590px;
+      display: flex;
+      align-items: center;
+      padding: 90px 0;
     }
-
     .eyebrow {
-      color: #72b7ff;
+      color: var(--cyan);
       font-size: 12px;
+      font-weight: 800;
       letter-spacing: 3px;
-      font-weight: bold;
       text-transform: uppercase;
     }
-
     h1 {
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1.12;
+      font-size: clamp(42px, 8vw, 76px);
+      line-height: 1.08;
       letter-spacing: -2px;
       margin: 22px 0;
     }
-
     h1 span {
-      color: #72b7ff;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-
-    .hero p {
-      max-width: 610px;
-      color: #aab6cc;
+    .hero p, .section-intro {
+      max-width: 650px;
+      color: var(--muted);
       font-size: 17px;
     }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 32px;
-    }
-
-    .button {
-      padding: 12px 20px;
-      border-radius: 8px;
-      border: 1px solid #34445e;
-      transition: 0.25s;
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn {
+      display: inline-block;
+      border-radius: 9px;
+      padding: 12px 19px;
+      border: 1px solid var(--border);
+      font-weight: 700;
       font-size: 14px;
+      transition: transform .2s, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); border-color: var(--cyan); }
+    .btn-primary {
+      color: #06101d;
+      background: linear-gradient(100deg, var(--blue), var(--cyan));
+      border: none;
     }
 
-    .button.primary {
-      background: #72b7ff;
-      color: #08111f;
-      border-color: #72b7ff;
-      font-weight: bold;
-    }
-
-    .button:hover {
-      transform: translateY(-3px);
-      border-color: #72b7ff;
-    }
-
-    section {
-      padding: 76px 0;
-      border-top: 1px solid #1b2638;
-    }
-
+    section { padding: 78px 0; scroll-margin-top: 70px; }
     .section-label {
-      color: #72b7ff;
+      color: var(--cyan);
       font-size: 12px;
       letter-spacing: 3px;
+      font-weight: 800;
       text-transform: uppercase;
     }
+    h2 { font-size: clamp(29px, 5vw, 42px); margin: 8px 0 14px; }
+    .section-intro { font-size: 15px; margin-bottom: 30px; }
 
-    h2 {
-      font-size: clamp(28px, 4vw, 40px);
-      margin: 10px 0 18px;
-    }
-
-    .muted {
-      color: #aab6cc;
-    }
-
-    .about-text {
-      max-width: 760px;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-
-    .skill {
-      border: 1px solid #29374d;
-      background: #101827;
-      color: #c9d7ed;
-      border-radius: 30px;
-      padding: 7px 14px;
-      font-size: 13px;
-    }
-
-    .projects {
+    .about-grid, .skills-grid, .project-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 30px;
+      margin-top: 28px;
     }
-
     .card {
-      background: linear-gradient(145deg, #121d30, #0c1321);
-      border: 1px solid #25334a;
-      border-radius: 14px;
-      padding: 26px;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: #72b7ff;
-    }
-
-    .card-number {
-      color: #72b7ff;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .card h3 {
-      margin: 14px 0 10px;
-      font-size: 19px;
-    }
-
-    .card p {
-      color: #aab6cc;
-      font-size: 14px;
-    }
-
-    .contact-panel {
-      border: 1px solid #29374d;
+      background: linear-gradient(145deg, rgba(19, 32, 52, .92),
+        rgba(12, 20, 34, .92));
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 34px;
-      background: #101827;
+      padding: 25px;
     }
+    .card h3 { font-size: 18px; margin-bottom: 9px; }
+    .card p { color: var(--muted); font-size: 14px; }
+    .icon { font-size: 24px; margin-bottom: 13px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+    .tag {
+      color: #b8d9ff;
+      border: 1px solid rgba(85, 168, 255, .25);
+      background: rgba(85, 168, 255, .08);
+      border-radius: 7px;
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+    .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .project-card { min-height: 220px; display: flex; flex-direction: column; }
+    .project-card .tag { align-self: flex-start; margin-bottom: 15px; }
+    .project-card p { flex: 1; }
+    .status { color: var(--cyan); font-size: 12px; margin-top: 18px; }
 
+    .contact-card {
+      border: 1px solid rgba(101, 228, 243, .24);
+      border-radius: 18px;
+      padding: 32px;
+      background: radial-gradient(ellipse at top right,
+        rgba(36, 112, 171, .18), transparent 60%), var(--panel);
+    }
     footer {
-      padding: 28px 0;
-      color: #7f8da6;
-      font-size: 13px;
-      border-top: 1px solid #1b2638;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px 0;
     }
 
-    footer .container {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+    @media (max-width: 720px) {
+      .nav-links { gap: 12px; font-size: 12px; }
+      .hero { min-height: 500px; padding: 65px 0; }
+      .about-grid, .skills-grid, .project-grid { grid-template-columns: 1fr; }
+      section { padding: 58px 0; }
+      .contact-card { padding: 23px; }
     }
-
-    @media (max-width: 700px) {
-      .nav-inner {
-        align-items: flex-start;
-        flex-direction: column;
-        padding: 18px 0;
-      }
-
-      .nav-links {
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-
-      .hero {
-        padding: 76px 0;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 56px 0;
-      }
-
-      .contact-panel {
-        padding: 24px;
-      }
+    @media (max-width: 390px) {
+      .logo { font-size: 13px; }
+      .nav-links { gap: 9px; font-size: 11px; }
     }
   </style>
 </head>
-
 <body>
-  <nav>
-    <div class="container nav-inner">
-      <a class="logo" href="#home">MY<span>PORTFOLIO.</span></a>
+  <header>
+    <nav class="container">
+      <a class="logo" href="#home">GZ<span>.</span></a>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </div>
-    </div>
-  </nav>
-
-  <header class="hero" id="home">
-    <div class="container">
-      <div class="eyebrow">Electrical & Electronic Engineering</div>
-      <h1>Hello, I'm<br><span>Ge Zichuan.</span></h1>
-      <p>
-        An engineering student exploring electronics, programming,
-        and the technology shaping our future.
-        This is my space to learn, build, and share.
-      </p>
-      <div class="buttons">
-        <a class="button primary" href="#projects">Explore my work ↗</a>
-        <a class="button" href="#about">More about me</a>
-      </div>
-    </div>
+    </nav>
   </header>
 
   <main>
+    <section class="hero container" id="home">
+      <div>
+        <div class="eyebrow">Engineering · Technology · Innovation</div>
+        <h1>Ge Zichuan<span>.</span><br>Building my future<br>in engineering.</h1>
+        <p>
+          Electrical and Electronic Engineering student at the
+          University of Birmingham, exploring programming, mathematics,
+          electronics and engineering design.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#projects">Explore my projects ↗</a>
+          <a class="btn" href="#about">More about me</a>
+        </div>
+      </div>
+    </section>
+
     <section id="about">
       <div class="container">
         <div class="section-label">01 / About</div>
-        <h2>A little about me.</h2>
-        <div class="about-text muted">
-          <p>
-            I'm an Electrical and Electronic Engineering student
-            interested in how technology works, from circuits and
-            computer systems to software and artificial intelligence.
-          </p>
-          <p style="margin-top: 14px;">
-            I'm building my skills step by step through coursework,
-            personal experiments, and projects. This website will
-            grow alongside my journey.
-          </p>
+        <h2>A student with a builder's mindset.</h2>
+        <p class="section-intro">
+          I am developing a strong foundation in engineering, learning
+          how mathematical principles, software and physical systems
+          work together to solve real-world problems.
+        </p>
+        <div class="about-grid">
+          <article class="card">
+            <div class="icon">🎓</div>
+            <h3>Education</h3>
+            <p>Electrical and Electronic Engineering</p>
+            <p>University of Birmingham, United Kingdom</p>
+          </article>
+          <article class="card">
+            <div class="icon">⌘</div>
+            <h3>Current focus</h3>
+            <p>
+              Building programming fundamentals, strengthening
+              mathematical reasoning and learning engineering analysis.
+            </p>
+          </article>
         </div>
       </div>
     </section>
@@ -312,17 +230,32 @@
     <section id="skills">
       <div class="container">
         <div class="section-label">02 / Skills</div>
-        <h2>What I'm learning.</h2>
-        <p class="muted">
-          The foundations I'm developing as an engineering student.
+        <h2>My technical toolkit.</h2>
+        <p class="section-intro">
+          Areas I am learning and developing through university study
+          and personal practice.
         </p>
-        <div class="skills">
-          <span class="skill">C Programming</span>
-          <span class="skill">HTML & CSS</span>
-          <span class="skill">Engineering Mathematics</span>
-          <span class="skill">Circuit Fundamentals</span>
-          <span class="skill">Problem Solving</span>
-          <span class="skill">Technical Writing</span>
+        <div class="skills-grid">
+          <article class="card">
+            <h3>Programming</h3>
+            <p>Learning to write, test and debug programs.</p>
+            <div class="tags"><span class="tag">C</span><span class="tag">VS Code</span></div>
+          </article>
+          <article class="card">
+            <h3>Mathematics</h3>
+            <p>Developing analytical and problem-solving skills.</p>
+            <div class="tags"><span class="tag">Vectors</span><span class="tag">Calculus</span></div>
+          </article>
+          <article class="card">
+            <h3>Engineering</h3>
+            <p>Learning to model forces and understand structures.</p>
+            <div class="tags"><span class="tag">Statics</span><span class="tag">Trusses</span></div>
+          </article>
+          <article class="card">
+            <h3>Tools & workflow</h3>
+            <p>Building good habits for documenting and presenting work.</p>
+            <div class="tags"><span class="tag">GitHub</span><span class="tag">MATLAB</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -330,37 +263,29 @@
     <section id="projects">
       <div class="container">
         <div class="section-label">03 / Projects</div>
-        <h2>Things I'm building.</h2>
-        <p class="muted">
-          A collection of my learning and future engineering projects.
+        <h2>Learning by building.</h2>
+        <p class="section-intro">
+          A growing collection of coursework and personal experiments.
+          These cards are starting points—add your finished work as it develops.
         </p>
-
-        <div class="projects">
-          <article class="card">
-            <div class="card-number">PROJECT 01</div>
-            <h3>C Programming</h3>
-            <p>
-              My first programs, coding exercises, and progress
-              learning the fundamentals of C.
-            </p>
+        <div class="project-grid">
+          <article class="card project-card">
+            <span class="tag">Programming</span>
+            <h3>C Programming Foundations</h3>
+            <p>Practice with program structure, output, variables and loops.</p>
+            <div class="status">Learning project · In progress</div>
           </article>
-
-          <article class="card">
-            <div class="card-number">PROJECT 02</div>
-            <h3>Engineering Studies</h3>
-            <p>
-              Notes and practical work exploring mathematics,
-              mechanics, and electronic engineering.
-            </p>
+          <article class="card project-card">
+            <span class="tag">Engineering Mechanics</span>
+            <h3>Pin-Jointed Truss Analysis</h3>
+            <p>Study force equilibrium and understand tension and compression in trusses.</p>
+            <div class="status">Coursework topic · Developing</div>
           </article>
-
-          <article class="card">
-            <div class="card-number">PROJECT 03</div>
-            <h3>Personal Website</h3>
-            <p>
-              This website is an ongoing project to learn web
-              development and share my progress.
-            </p>
+          <article class="card project-card">
+            <span class="tag">Web Development</span>
+            <h3>Personal Portfolio</h3>
+            <p>This website, built with HTML and CSS and published using GitHub Pages.</p>
+            <div class="status">Live website · Version 1</div>
           </article>
         </div>
       </div>
@@ -368,16 +293,18 @@
 
     <section id="contact">
       <div class="container">
-        <div class="contact-panel">
-          <div class="section-label">04 / Contact</div>
+        <div class="section-label">04 / Contact</div>
+        <div class="contact-card">
           <h2>Let's connect.</h2>
-          <p class="muted">
-            Interested in engineering, technology, or working
-            on something interesting? Feel free to get in touch.
+          <p class="section-intro">
+            Interested in engineering, technology and learning through
+            projects. Feel free to connect with me on GitHub.
           </p>
-          <p class="muted" style="margin-top: 16px;">
-            Contact details coming soon.
-          </p>
+          <a class="btn btn-primary"
+             href="https://github.com/gzc070920-code"
+             target="_blank" rel="noopener noreferrer">
+            Visit my GitHub ↗
+          </a>
         </div>
       </div>
     </section>
@@ -385,8 +312,7 @@
 
   <footer>
     <div class="container">
-      <span>© 2026 Ge Zichuan</span>
-      <span>Built with curiosity and code.</span>
+      © 2026 Ge Zichuan · Built with HTML & CSS · Hosted on GitHub Pages
     </div>
   </footer>
 </body>
