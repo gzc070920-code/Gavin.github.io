@@ -321,5 +321,125 @@
       © 2026 Ge Zichuan · Built with HTML & CSS · Hosted on GitHub Pages
     </div>
   </footer>
+  
+<section id="calculator" style="max-width:900px;margin:60px auto;padding:28px;border:1px solid #263b50;border-radius:18px;background:#101b2b;color:#e8f0f8;font-family:Arial,sans-serif;">
+  <p style="color:#38d9f5;letter-spacing:2px;font-size:12px;">ENGINEERING TOOL</p>
+  <h2 style="margin-bottom:8px;">电路参数计算器</h2>
+  <p style="color:#a8b7c9;">计算电压、电流、电阻与电功率</p>
+
+  <label for="calc-type">选择计算项目</label>
+  <select id="calc-type" style="display:block;width:100%;box-sizing:border-box;padding:12px;margin:8px 0 18px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+    <option value="voltage">计算电压 V = I × R</option>
+    <option value="current">计算电流 I = V ÷ R</option>
+    <option value="resistance">计算电阻 R = V ÷ I</option>
+    <option value="power">计算电功率 P = V × I</option>
+  </select>
+
+  <div id="calc-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+    <div>
+      <label id="label-a" for="calc-a">电流 I（A）</label>
+      <input id="calc-a" type="number" step="any" placeholder="输入电流" style="display:block;box-sizing:border-box;width:100%;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+    </div>
+    <div>
+      <label id="label-b" for="calc-b">电阻 R（Ω）</label>
+      <input id="calc-b" type="number" step="any" placeholder="输入电阻" style="display:block;box-sizing:border-box;width:100%;padding:12px;margin-top:8px;background:#17283b;color:white;border:1px solid #38516b;border-radius:8px;">
+    </div>
+  </div>
+
+  <button id="calc-button" type="button" style="margin-top:20px;padding:12px 22px;border:0;border-radius:8px;background:#38d9f5;color:#081321;font-weight:bold;cursor:pointer;">计算结果</button>
+
+  <div id="calc-result" aria-live="polite" style="margin-top:20px;padding:16px;border-radius:10px;background:#17283b;color:#38d9f5;">
+    计算结果将在这里显示
+  </div>
+  <p style="margin-top:18px;color:#91a4ba;font-size:12px;">学习用途。请确认输入单位正确，并独立核对重要工程计算结果。</p>
+</section>
+
+<script>
+(() => {
+  const type = document.getElementById("calc-type");
+  const a = document.getElementById("calc-a");
+  const b = document.getElementById("calc-b");
+  const labelA = document.getElementById("label-a");
+  const labelB = document.getElementById("label-b");
+  const result = document.getElementById("calc-result");
+
+  const settings = {
+    voltage: ["电流 I（A）", "电阻 R（Ω）", "电压 V（V）"],
+    current: ["电压 V（V）", "电阻 R（Ω）", "电流 I（A）"],
+    resistance: ["电压 V（V）", "电流 I（A）", "电阻 R（Ω）"],
+    power: ["电压 V（V）", "电流 I（A）", "电功率 P（W）"]
+  };
+
+  type.addEventListener("change", () => {
+    labelA.textContent = settings[type.value][0];
+    labelB.textContent = settings[type.value][1];
+    a.value = "";
+    b.value = "";
+    result.textContent = "请输入参数，然后点击计算结果";
+  });
+
+  document.getElementById("calc-button").addEventListener("click", () => {
+    if (a.value.trim() === "" || b.value.trim() === "") {
+      result.textContent = "请先填写两个参数。";
+      return;
+    }
+
+    const x = Number(a.value);
+    const y = Number(b.value);
+
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+      result.textContent = "请输入有效的数字。";
+      return;
+    }
+
+    let value;
+    let formula;
+
+    switch (type.value) {
+      case "voltage":
+        value = x * y;
+        formula = "V = I × R";
+        break;
+      case "current":
+        if (y === 0) {
+          result.textContent = "电阻不能为零。";
+          return;
+        }
+        value = x / y;
+        formula = "I = V ÷ R";
+        break;
+      case "resistance":
+        if (y === 0) {
+          result.textContent = "电流不能为零。";
+          return;
+        }
+        value = x / y;
+        formula = "R = V ÷ I";
+        break;
+      case "power":
+        value = x * y;
+        formula = "P = V × I";
+        break;
+    }
+
+    if (!Number.isFinite(value)) {
+      result.textContent = "计算结果超出可处理范围。";
+      return;
+    }
+
+    const units = {
+      voltage: "V",
+      current: "A",
+      resistance: "Ω",
+      power: "W"
+    };
+
+    result.textContent =
+      formula + "；计算结果：" +
+      Number(value.toPrecision(10)) + " " + units[type.value];
+  });
+})();
+</script>
+
 </body>
 </html>
